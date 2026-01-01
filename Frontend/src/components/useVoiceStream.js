@@ -1,4 +1,4 @@
-// Frontend/src/components/useVoiceStream.js
+// Fro  tend/src/components/useVoiceStream.js
 
 import { useRef, useState } from "react";
 

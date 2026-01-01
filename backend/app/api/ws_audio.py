@@ -128,10 +128,12 @@ async def process_stream(stream_id: str, websocket: WebSocket) -> None:
     except Exception as e:
         logger.error(f"Error processing stream {stream_id}: {e}")
     finally:
-        # Cleanup on disconnect
+
         await buffer_manager.remove_buffer(stream_id)
         await stream_router.unregister_stream(stream_id)
         await confidence_service.remove_stream(stream_id)
+        from app.audio.pipeline import cleanup_stream_states
+        cleanup_stream_states(stream_id)
         logger.info(f"Cleaned up stream {stream_id}")
 
 

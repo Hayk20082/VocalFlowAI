@@ -17,15 +17,17 @@ class Settings(BaseSettings):
     bit_depth: int = 16  # 16-bit PCM
     
     # DSP pipeline settings
-    enable_rnnoise: bool = False  # Enable RNNoise-based noise reduction (Phase 3)
+    enable_rnnoise: bool = True  # Enable RNNoise-based noise reduction (Phase 3)
     enable_gain_normalization: bool = True
     enable_noise_reduction: bool = True  # Basic noise reduction (used if RNNoise disabled)
-    enable_confidence_boost: bool = False  # Enable voice confidence booster (Phase 3)
+    enable_confidence_boost: bool = True  # Enable voice confidence booster (Phase 3)
     enable_pitch_adjustment: bool = False  # Phase 2+
     
     # ML enhancement settings (Phase 3)
-    enable_ml_enhancement: bool = False  # Enable ML-based voice enhancement
-    onnx_model_path: Optional[str] = "models/voice_enhance.onnx"  # Path to ONNX model file
+    onnx_model_path: Optional[str] = "app/models/denoiser_model.onnx"
+    enable_ml_enhancement: bool = True # Enable ML-based voice enhancement
+    # onnx_model_path: Optional[str] = None  # Path to ONNX model file
+
     ml_frame_size: int = 320  # Frame size for ML model (samples, default: 20ms at 16kHz)
     
     # Confidence scoring settings
