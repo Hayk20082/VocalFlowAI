@@ -1,29 +1,19 @@
 import time
 import numpy as np
-from pathlib import Path  # ← Добавлен импорт
 from app.audio.models import AudioFrame
 from app.core.config import settings
 from app.core.logging import logger
-from app.audio.dsp.gain import normalize_gain  # ← Добавлен импорт normalize_gain
-import onnxruntime as ort
+from app.audio.dsp.gain import normalize_gain
 
-# Глобальные переменные
-ort_session = None
+# Use the unified ONNX session from ml/enhancement.py to avoid duplication
+from app.audio.ml.enhancement import load_enhancement_model
+
+# Глобальные переменные для состояния стрима
 stream_states = {}  # stream_id -> (states, atten_lim_db)
 
-from pathlib import Path
 def load_speech_denoiser():
-    global ort_session
-    if ort_session is None:
-        # Use the configured model path relative to the app directory
-        model_path = Path(__file__).parent.parent.parent / settings.onnx_model_path
-        logger.info(f"Loading SpeechDenoiser model from {model_path}")
-        try:
-            ort_session = ort.InferenceSession(str(model_path))
-        except Exception as e:
-            logger.error(f"Failed to load ONNX model: {e}")
-            ort_session = None
-    return ort_session
+    """Load ONNX model using unified loader to avoid duplication."""
+    return load_enhancement_model()
 
 def speech_denoiser_enhance(frame: AudioFrame) -> AudioFrame:
     session = load_speech_denoiser()

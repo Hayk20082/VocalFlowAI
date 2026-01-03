@@ -39,6 +39,11 @@ class Settings(BaseSettings):
     # Performance settings
     max_concurrent_streams: int = 10
     processing_timeout_ms: int = 20  # Target per-frame processing time
+
+    # Memory management settings
+    max_buffer_frames_per_stream: int = 500  # Maximum frames to buffer per stream
+    max_memory_mb: int = 512  # Maximum memory usage in MB
+    cleanup_interval_seconds: int = 300  # How often to run cleanup (5 minutes)
     
     # Logging
     log_level: str = "INFO"

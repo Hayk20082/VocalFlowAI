@@ -2,8 +2,8 @@
 
 import { useRef, useState } from "react";
 
-
-const WS_URL = "wss://vocalflowai-production.up.railway.app/ws/audio";
+const WS_URL = "ws://localhost:8000/ws/audio";
+// const WS_URL = "wss://vocalflowai-production.up.railway.app/ws/audio";
 const SAMPLE_RATE = 16000;
 const FRAME_SAMPLES = 320; // 20ms при 16kHz
 
@@ -21,7 +21,7 @@ export function useVoiceStream() {
   const enhancedChunks = useRef([]); // собираем улучшенный звук от сервера
 
   const start = async () => {
-    try {
+    try { 
       setStatus("recording");
       setPreviewUrl(null);
       accumulatedInput.current = [];
