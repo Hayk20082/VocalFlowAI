@@ -1,4 +1,4 @@
-#VocalFlowAI
+# VocalFlowAI
 
 Real-time AI Voice Enhancement & Confidence Scoring
 VocalFlowAI is a web application that enhances your voice in real-time: removes background noise, normalizes volume, and makes your speech sound more confident and professional. Perfect for calls, streaming, podcasts, and voice recording.
